@@ -9,14 +9,14 @@ We use git to fetch Mininet and FRR from github and build from source.
 ## Step 1: Create a Ubuntu based VM
 
 There are multiple options for working with VMs. 
-[https://www.virtualbox.org/](VirtualBox) is probably the easiest and a good
+[Virtual Box](https://www.virtualbox.org/) is probably the easiest and a good
 place to start if you are not familiar with working with VMs. I use 
-[https://virt-manager.org/](virt-manager) on Linux to work with qemu/KVM based
+[virt-manager](https://virt-manager.org/) on Linux to work with qemu/KVM based
 virtual machines, and these instructions refer to virt-manager commands. 
 
 ### Download Ubuntu 22.04.4 LTS ISO Image
 
-I use the [https://ubuntu.com/download/server](Ubuntu Server) image for the 
+I use the [Ubuntu Server](https://ubuntu.com/download/server) image for the 
 Mininet/FRR system since all of my access is terminal based and it is a bit
 more lightweight. You can also use the desktop verison if you want to run
 tests that include browers, etc.
@@ -35,20 +35,22 @@ File -> New VM
 - 8192 memory
 - 4 CPUs
 - 32 GB storage
+- set the name to vm-frr
 - Go
 
 After the VM starts, select Try or Install Ubuntu. Walk through the install,
 I use the defaults.
 
 When promoted for names and passwords, I use the following:
-- Your name: <whatever>
+- Your name: *whatever*
 - Your servers name: frr-system
 - Pick a user name: ubuntu
 - Choose a password: ubuntu
 - Confirm your password: ubuntu
 
 You may select different values, just do not forget the user name and
-password.
+password. Also, do not choose frr as a user. We will create that user
+later, dedicated to running FRR.
 
 Select the option to install the OpenSSH server and import an SSH identity.
 (Importing the identify from Github works great if you have that setup).
@@ -56,7 +58,10 @@ Select the option to install the OpenSSH server and import an SSH identity.
 If you do not use a secure password (as I did above), you probably should
 not allow password auth over SSH.
 
-Once the install completes, select Reboot now. Once the reboot is complete, 
+Once the install completes, select Reboot now. If the screen pauses and 
+complains about the cdrom, just press ENTER.
+
+Once the reboot is complete, 
 you can find the IP address either through the virt-manager or by
 logging the VM terminal with the user name and password and running the 
 ip command:
@@ -70,7 +75,7 @@ ip command:
 ip a
 ```
 
-Look for inet <address> under the enp1so: device
+Look for inet *address* under the enp1so: device
 
 
 From here, you can ssh into the system using the ip address and your
@@ -101,7 +106,7 @@ git clone https://github.com/jmwanderer/mininet_frr
 
 ## Step 2: Build and Install Mininet
 
-I roughly followed the Option 2 of the [https://mininet.org/download/](Mininet download instuctions).
+I roughly followed the Option 2 of the [Mininet download instuctions](https://mininet.org/download/)
 
 Clone the mininet git repository and checkout version 2.3.0
 
@@ -136,9 +141,9 @@ sudo mn --switch ovsbr --test pingall
 ## Step 3: Build FRR
 
 We use the instructions for 
-[https://docs.frrouting.org/en/latest/installation.html](installing FRR from source) 
+[installing FRR from source](https://docs.frrouting.org/en/latest/installation.html)
 on the 
-[https://docs.frrouting.org/projects/dev-guide/en/latest/building-frr-for-ubuntu2204.html](Ubuntu 22.04 platform)
+[Ubuntu 22.04 platform](https://docs.frrouting.org/projects/dev-guide/en/latest/building-frr-for-ubuntu2204.html)
 
 ### Install Dependencies
 
@@ -254,6 +259,8 @@ sudo ./mn_topo.py
 ```
 
 Try the pingall command to verify connectivity.
+
+Enter exit or ^D to stop mininet.
 
 
 
