@@ -1,22 +1,23 @@
 # mininet_frr
-Free Range Routing (FRR) over Mininet topologies
+Free Range Routing (FRR) on Mininet topologies
 
 # Purpose
 
 Network emulators enable hands-on learning, experimenting, and testing network 
-protocols on virtual toplogiies. Mininet uses Linux network name spaces for 
+protocols on virtual toplogies. Mininet uses Linux network name spaces for 
 lightweight emulation of routers, switches, and hosts.
 
-This package provides a simple integration of Mininet and FRR with a variety
-of simple example topologoes and configurations.
+This package provides a basic integration of Mininet and FRR with a variety
+of example topologies and configurations.
 
 # Overview
 
 This repository contains various topologies and configurations that 
-run on a Linux system with both FRR and Mininet installed. While not strictly
-necessary, running Mininet and FRR in a VM is recommended.
+run on a Linux system with FRR and Mininet installed. While not strictly
+necessary, running Mininet and FRR in a VM is strongly recommended.
 
-To run these examples, clone this repostory on an FRR/Mininet system.
+To run these examples, clone this repostory on an FRR/Mininet system and
+run the individual Mininet Python scripts.
 
 ## Topologies
 
@@ -34,6 +35,7 @@ do the following:
 - configure FRR by running configure script.
 - start the eumlation by running the python topology script
 
+Example:
 ```
 cd two_router
 ./config_frr.sh
@@ -41,41 +43,48 @@ sudo mn_topo.py
 ```
 
 This starts the mininet emulator and the relevant FRR routing deamons, and brings up the 
-mininet command line. Mininet provides access to the shell on each emulated node
+mininet command line. Mininet provides access to the linux shell on each emulated node
 and connectivity tests. To stop the emulation and shutdown the FRR daemons, enter exit or press ^D.
 
 At the mininet> prompt, you can run tests:
+
+For example:
 ```
 r1 ping r3
 pingall
 ```
 
-Run Linux shell commands on individual nodes:
+To run Linux shell commands on individual nodes:
 ```
 r1 ip route
 ```
 
-To access the FRR command shell, run vtysh from a 
+To access the FRR command and configuration shell, run vtysh from a 
 a Linux termimal for a specific node: vtysh -N "node name"
 
+Example:
 ```
 sudo vtysh -N r1
+show running-config
 ```
 
 ## Notes
 
-These examples focus on routing protocols and protocol configuraiton. We uses Mininet switches
+These examples focus on routing protocols and protocol configuration. 
+We uses Mininet switches
 to connect multiple hosts in a submit.
 Mininet supports Openflow by running a controller, however none of these examples
-directly use Openflow, beyond whatever Mininet may be doing to make the switches just work.
+directly use Openflow, beyond whatever Mininet may be doing to make 
+the switches "just work".
 
 The configuration scripts config_frr.sh create subdirectories under the 
 FRR configuraiton, run state, and logging directories and populates the configuration
-files. Note that any existing configuration files in these directories are erased.
+files. Note that any existing configuration files in these directories are erased
+as new ones are applied. Copy any updated configurations out of 
+/etc/frr/*nodename* before reconfiguring.
 
-
-Also note that each of the scenarios "work" in that the routing configuration 
-provides connectivity, but are likely not good examples of how to do things 
+While each of these scenarios "work" in that the routing configuration 
+provides connectivity, but are not good examples of how to do things 
 "in the right way". There are improvements to be made.
 
 # Requirements
