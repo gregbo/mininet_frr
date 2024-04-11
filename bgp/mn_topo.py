@@ -79,6 +79,7 @@ class NetworkTopo(Topo):
         self.addLink(d1, s1)
         self.addLink(d3, s3)
         self.addLink(d4, s4)
+
 def run():
     topo = NetworkTopo()
     net = Mininet(topo=topo)
