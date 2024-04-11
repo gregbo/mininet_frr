@@ -64,6 +64,11 @@ sudo vtysh -N r1
 
 ## Notes
 
+These examples focus on routing protocols and protocol configuraiton. We uses Mininet switches
+to connect multiple hosts in a submit.
+Mininet supports Openflow by running a controller, however none of these examples
+directly use Openflow, beyond whatever Mininet may be doing to make the switches just work.
+
 The configuration scripts config_frr.sh create subdirectories under the 
 FRR configuraiton, run state, and logging directories and populates the configuration
 files. Note that any existing configuration files in these directories are erased.
@@ -88,4 +93,12 @@ Instructions for building from source can be found at
 [https://github.com/jmwanderer/mininet_frr/blob/main/make_vm/README.md](make_vm/README.md)
 
 
+#  Additional Resources
+
+An excellent description of network name spaces and mininet can be found
+[Network Emulation using Network Namespaces and Mininet](https://www.inf.usi.ch/faculty/carzaniga/edu/adv-ntw/mininet.html).
+
+Kudos to [edoardesd](https://stackoverflow.com/users/7892067/edoardesd) for an answer on Stack Overflow:
+[(mininet) How to create a topology with two routers and their respective hosts
+](https://stackoverflow.com/questions/46595423/mininet-how-to-create-a-topology-with-two-routers-and-their-respective-hosts) 
 
