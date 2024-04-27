@@ -9,8 +9,8 @@ In order to reach host d2, router r1 needs the next hop for the 10.1.0.0/24 subn
 
 In order to reach host d1, router r2 needs the next hop for the 10.0.00/24 subnet.
 
-We have two examples:
-- mn_topy.py: Uses FRR with configured static routes.
-- mn_no_frr.py: Uses ip route to directly configure routes without FRR
+We have two examples, one that uses FRR and one that is Linux only:
+- mn_topo.py: Uses FRR with configured static routes.
+- mn_no_frr.py: Uses the linux ip route to directly configure routes without running FRR
 
 

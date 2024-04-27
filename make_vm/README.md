@@ -41,15 +41,15 @@ File -> New VM
 After the VM starts, select Try or Install Ubuntu. Walk through the install,
 I use the defaults.
 
-When promoted for names and passwords, I use the following:
-- Your name: *whatever*
+When prompted for names and passwords, I use the following:
+- Your name: *anything*
 - Your servers name: frr-system
 - Pick a user name: ubuntu
 - Choose a password: ubuntu
 - Confirm your password: ubuntu
 
 You may select different values, just do not forget the user name and
-password. Also, do not choose frr as a user. We will create that user
+password. Also, do not choose frr as a user. That user will be created
 later, dedicated to running FRR.
 
 Select the option to install the OpenSSH server and import an SSH identity.

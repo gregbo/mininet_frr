@@ -39,7 +39,7 @@ Example:
 ```
 cd two_router
 ./config_frr.sh
-sudo mn_topo.py
+sudo ./mn_topo.py
 ```
 
 This starts the mininet emulator and the relevant FRR routing deamons, and brings up the 
