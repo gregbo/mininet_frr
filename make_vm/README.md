@@ -1,10 +1,13 @@
 # Create a Mininet / FRR VM
-These instructions produce an Ubuntu based Mininet/FRR VM image for:
+These instructions create an Ubuntu based Mininet/FRR VM image with:
 - Ubuntu 22.04.4 LTS
 - Mininet 2.3.0
 - FRR 9.1
 
-We use git to fetch Mininet and FRR from github and build from source.
+Only these versions have been tested, other combinations could have problems.
+
+We download the Ubuntu iso image and we use git to fetch Mininet and FRR 
+from github and build from source.
 
 ## Step 1: Create a Ubuntu based VM
 
@@ -16,10 +19,9 @@ virtual machines, and these instructions refer to virt-manager commands.
 
 ### Download Ubuntu 22.04.4 LTS ISO Image
 
-I use the [Ubuntu Server](https://ubuntu.com/download/server) image for the 
-Mininet/FRR system since all of my access is terminal based and it is a bit
-more lightweight. You can also use the desktop verison if you want to run
-tests that include browers, etc.
+We use the Ubuntu server image instead of the desktop since it is more lightweight and 
+all access is done though the terminal. You can use the desktop image if you want to run
+tests that include a web browser and such. But stick with version [22.04.4](https://releases.ubuntu.com/22.04/)
 
 Get the file: ubuntu-22.04.4-live-server-amd64.iso
 
@@ -27,7 +29,8 @@ Get the file: ubuntu-22.04.4-live-server-amd64.iso
 
 I run virt-manager and use the GUI to step through creating a new VM and
 installing Ubuntu Linux. There are various ways to do this. I create a VM
-with 8 GB of RAM, 32 GB of storage, and 4 CPUs.
+with 8 GB of RAM, 32 GB of storage, and 4 CPUs. Mininet and FRR can run with fewer resources.
+You could use 2GB of RAM, 10GB of storage, and 1 CPU if your machine is small.
 
 File -> New VM
 - Select local install media
@@ -52,17 +55,19 @@ You may select different values, just do not forget the user name and
 password. Also, do not choose frr as a user. That user will be created
 later, dedicated to running FRR.
 
-Select the option to install the OpenSSH server and import an SSH identity.
-(Importing the identify from Github works great if you have that setup).
-
-If you do not use a secure password (as I did above), you probably should
-not allow password auth over SSH.
+Select the option to install the OpenSSH server and allow password access.
+An SSH client is the easiest way to run multiple terminal sessions in the
+VM at one time.  You can also import an SSH identity to avoid typing a 
+password.
+(Importing the identify from Github works great if you have that setup on
+github.com).
 
 Once the install completes, select Reboot now. If the screen pauses and 
 complains about the cdrom, just press ENTER.
 
 Once the reboot is complete, 
-you can find the IP address either through the virt-manager or by
+you can find the IP address to give to the SSH client 
+either through the virt-manager or by
 logging the VM terminal with the user name and password and running the 
 ip command:
 
@@ -95,10 +100,11 @@ The rest of this process will be done inside the VM.
 
 ## Step 2: Get the mininet_frr repo
 
+Log into the VM. 
 These instructions assume everything is done in the home directory of 
 your user account on the VM.
 
-Use git to pull in this repository:
+Use git to copy the Mininet/FRR integration scripts and conmfigs:
 
 ```
 git clone https://github.com/jmwanderer/mininet_frr
@@ -106,7 +112,7 @@ git clone https://github.com/jmwanderer/mininet_frr
 
 ## Step 2: Build and Install Mininet
 
-I roughly followed the Option 2 of the [Mininet download instuctions](https://mininet.org/download/)
+Here I roughly follow Option 2 of the [Mininet download instuctions](https://mininet.org/download/):
 
 Clone the mininet git repository and checkout version 2.3.0
 
@@ -117,7 +123,7 @@ git checkout -b mininet-2.3.0 2.3.0
 ```
 
 Apply a basic patch included in this repo to fix the 
-Mininet source installation:
+Mininet source installation (this is fixed in later versions of Mininet):
 
 ```
 git apply ../mininet_frr/make_vm/mininet.patch
@@ -140,7 +146,10 @@ sudo mn --switch ovsbr --test pingall
 
 ## Step 3: Build FRR
 
-We use the instructions for 
+This is the most complex task, but if you follow the instructions, FRR should all build and 
+install correctly in the VM.
+
+I use the instructions for 
 [installing FRR from source](https://docs.frrouting.org/en/latest/installation.html)
 on the 
 [Ubuntu 22.04 platform](https://docs.frrouting.org/projects/dev-guide/en/latest/building-frr-for-ubuntu2204.html)
@@ -243,8 +252,8 @@ sudo install -m 640 -o frr -g frr tools/etc/frr/daemons /etc/frr/daemons
 
 At this point, the FRR/Mininet system is complete. 
 There are more steps to enable MPLS found in the instructions. 
-Because we include an ip forwarding directive in the FRR configs, we do not
-need to modify the system sysctls.conf file.
+(Background note: because we include an ip forwarding directive in the FRR configs, we do not
+need to modify the system sysctls.conf file.)
 
 
 ### Run a Topology
