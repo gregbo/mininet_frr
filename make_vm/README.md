@@ -7,7 +7,8 @@ These are instructions topcreate an Ubuntu based Mininet/FRR VM image with:
 Only these versions have been tested, other combinations could have problems.
 
 The following are the steps to download the Ubuntu iso image, use git to fetch Mininet and FRR 
-sources from github.com, and build and install Mininet and FRR. 
+sources from github.com, and build and install Mininet and FRR.  Building from source is a bit
+more effort, but ensures you get exactly what you want.
 
 ## Step 1: Create a Ubuntu based VM
 
@@ -33,11 +34,11 @@ installing Ubuntu Linux:
 
 File -> New VM
 - Select 'local install media'
-- Choose the downloaded ubuntu iso file: ubuntu-22.04.4-live-server-amd64.iso
+- Choose the downloaded ubuntu iso file: **ubuntu-22.04.4-live-server-amd64.iso**
 - 8192 memory
 - 4 CPUs
 - 32 GB storage
-- set the name to vm-frr
+- set the name to **vm-frr**
 - Go
 
 After the VM starts, select "Try or Install Ubuntu". Walk through the install,
@@ -45,13 +46,13 @@ select the default options.
 
 When prompted for names and passwords, I use the following:
 - Your name: *anything*
-- Your servers name: frr-system
-- Pick a user name: ubuntu
-- Choose a password: ubuntu
-- Confirm your password: ubuntu
+- Your servers name: **frr-system**
+- Pick a user name: **ubuntu**
+- Choose a password: **ubuntu**
+- Confirm your password: **ubuntu**
 
 You may pick different values for the user name and password, just do not forget 
-what you picked and do not choose 'frr' as a user name.
+what you picked and do not choose **frr** as a user name.
 That user will be created later, dedicated to running FRR.
 
 Select the option to install the OpenSSH server and allow password access.
