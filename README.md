@@ -71,21 +71,21 @@ show running-config
 ## Notes
 
 These examples focus on routing protocols and protocol configuration. 
-We uses Mininet switches
+We use Mininet switches
 to connect multiple hosts in a submit.
-Mininet supports Openflow by running a controller, however none of these examples
-directly use Openflow, beyond whatever Mininet may be doing to make 
+Mininet supports Openflow by running a controller, however these examples do not
+use Openflow, beyond whatever Mininet may be doing to make 
 the switches "just work".
 
 The configuration scripts config_frr.sh create subdirectories under the 
-FRR configuraiton, run state, and logging directories and populates the configuration
+FRR configuration, run state, and logging directories and populates the configuration
 files. Note that any existing configuration files in these directories are erased
 as new ones are applied. Copy any updated configurations out of 
 /etc/frr/*nodename* before reconfiguring.
 
 While each of these scenarios "work" in that the routing configuration 
-provides connectivity, but are not good examples of how to do things 
-"in the right way". There are improvements to be made.
+provides connectivity, they are not good examples of how to do things 
+"in the right way". There are many improvements that can be made to the FRR configurations..
 
 # Requirements
 It is assumed that FRR uses the following directories, which are the default 
@@ -95,10 +95,11 @@ under Ubuntu Linux:
 - /var/frr : run state
 - /usr/lib/frr/frrinit.sh : start script
 
-The scripts in this project create a directory for each routing node under /etc/frr, /var/frr, and /var/log/frr
+The scripts in this project create a directory for each routing node under 
+/etc/frr, /var/frr, and /var/log/frr
 
 You can build your own FRR/Mininet VM image.
-Instructions for building from source can be found at
+Instructions for building from source can be found at:
 [https://github.com/jmwanderer/mininet_frr/blob/main/make_vm/README.md](make_vm/README.md)
 
 
