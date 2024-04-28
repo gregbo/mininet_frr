@@ -116,11 +116,11 @@ Kudos to [edoardesd](https://stackoverflow.com/users/7892067/edoardesd) for an a
 1. Sketch a network design with IP addresses specified for each interface. Get this right, or nothing will work. 
 2. Copy or modify an existing example directory
 3. Change mn_topo.py and modify the following functions:
-  - NetworkTopo: change the hosts, switches, routers, and links
-  - Run: startup and shutdown FRR for each virtual router
+    - NetworkTopo: change the hosts, switches, routers, and links
+    - Run: startup and shutdown FRR for each virtual router
 4. Update config_frr.sh to set the list of virtual routers
 5. Create configs for each virtual router:
-  - daemons - update to change the routing protocols to be run
-  - vtysh.conf - update to contain a unique hostname
-  - frr.conf - use vtysh to create your configuration and copy from /etc/frr/*node* after saving (write) the config.
+    - daemons - update to change the routing protocols to be run
+    - vtysh.conf - update to contain a unique hostname
+    - frr.conf - use vtysh to create your configuration and copy from /etc/frr/*node* after saving (write) the config.
 
