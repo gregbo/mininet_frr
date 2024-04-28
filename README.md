@@ -7,7 +7,7 @@ Network emulators enable hands-on learning, experimenting, and testing network
 protocols on virtual toplogies. Mininet uses Linux network name spaces for 
 lightweight emulation of routers, switches, and hosts.
 
-This package provides a basic integration of Mininet and FRR with a variety
+This package uses a simple integration of Mininet and FRR with a variety
 of example topologies and configurations.
 
 # Overview
@@ -22,8 +22,8 @@ run the individual Mininet Python scripts.
 ## Topologies
 
 - two_router: 2 routers configured static routes 
-- ospf:  4 routers using OSPF
-- bpg: 4 routers in 3 AS regions using BGP 
+- ospf: 4 routers running OSPF
+- bpg: 4 routers in 3 AS regions running BGP 
 
 
 ## Running a Toplogy
@@ -42,7 +42,7 @@ cd two_router
 sudo ./mn_topo.py
 ```
 
-This starts the mininet emulator and the relevant FRR routing deamons, and brings up the 
+This starts the mininet emulator and the relevant FRR routing deamons and brings up the 
 mininet command line. Mininet provides access to the linux shell on each emulated node
 and connectivity tests. To stop the emulation and shutdown the FRR daemons, enter exit or press ^D.
 
@@ -71,10 +71,9 @@ show running-config
 ## Notes
 
 These examples focus on routing protocols and protocol configuration. 
-We use Mininet switches
-to connect multiple hosts in a submit.
+We use Mininet switches to connect multiple hosts in a subnet.
 Mininet supports Openflow by running a controller, however these examples do not
-use Openflow, beyond whatever Mininet may be doing to make 
+use Openflow beyond whatever Mininet may be doing (if anything) to make 
 the switches "just work".
 
 The configuration scripts config_frr.sh create subdirectories under the 
@@ -84,8 +83,8 @@ as new ones are applied. Copy any updated configurations out of
 /etc/frr/*nodename* before reconfiguring.
 
 While each of these scenarios "work" in that the routing configuration 
-provides connectivity, they are not good examples of how to do things 
-"in the right way". There are many improvements that can be made to the FRR configurations..
+provides connectivity, they are likley not good examples of how to do things 
+"in the right way". There are improvements that can be made to the FRR configurations.
 
 # Requirements
 It is assumed that FRR uses the following directories, which are the default 
@@ -111,4 +110,17 @@ An excellent description of network name spaces and mininet can be found
 Kudos to [edoardesd](https://stackoverflow.com/users/7892067/edoardesd) for an answer on Stack Overflow:
 [(mininet) How to create a topology with two routers and their respective hosts
 ](https://stackoverflow.com/questions/46595423/mininet-how-to-create-a-topology-with-two-routers-and-their-respective-hosts) 
+
+# Creating Custom Networks
+
+1. Sketch a network design with IP addresses specified for each interface. Get this right, or nothing will work. 
+2. Copy or modify an existing example directory
+3. Change mn_topo.py and modify the following functions:
+  - NetworkTopo: change the hosts, switches, routers, and links
+  - Run: startup and shutdown FRR for each virtual router
+4. Update config_frr.sh to set the list of virtual routers
+5. Create configs for each virtual router:
+  - daemons - update to change the routing protocols to be run
+  - vtysh.conf - update to contain a unique hostname
+  - frr.conf - use vtysh to create your configuration and copy from /etc/frr/*node* after saving (write) the config.
 
