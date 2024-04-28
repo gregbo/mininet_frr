@@ -65,25 +65,30 @@ github.com).
 Once the install completes, select Reboot now. If the screen pauses and 
 complains about the cdrom, just press ENTER.
 
-Once the reboot is complete, you can find the IP address to connect to 
-with the SSH client either through the virt-manager:
+Once the reboot is complete, you can login on the VM terminal with the username ubuntu and the password ubuntu.
+However, I feel the best interaction with the VM is by logging in over SSH.
+
+If you are using VirtualBox defaults, you will need to add a port forwarding rule
+for ssh access. See these [instructions](https://nsrc.org/workshops/2014/sanog23-virtualization/raw-attachment/wiki/Agenda/ex-virtualbox-portforward-ssh.htm) for port forwarding.
+
+When using virt-manager, I login into the VM by running ssh conencting to the IP address of the VM.
+I find the IP address to connect to through the virt-manager:
 
   - View -> Details
   - NIC: :xx:xx:xx  -> IP address
 
 
-or by connecting to the VM terminal with the user name and password and running the 
+The IP address can also be found by connecting to the VM terminal with the user name and password and running the 
 ip command:
 
 ```
 ip a
 ```
 
-Look for inet *address* under the enp1so: device
-
+Look for inet *address* under the enp1so: (or similar) device
 
 At this point, you can ssh into the system using the ip address with the username
-ubuntu and password ubuntu:
+ubuntu and password ubuntu (substitute your own IP address):
 
 ```
 ssh ubuntu@192.168.122.109
@@ -94,6 +99,9 @@ The rest of this process will be done inside the VM.
 Upgrade Ubuntu to the latest packages and install additional packages:
 ```
 sudo apt update
+```
+
+```
 sudo apt upgrade
 ```
 
@@ -118,6 +126,9 @@ Clone the mininet git repository and checkout version 2.3.0
 
 ```
 git clone https://github.com/mininet/mininet 
+```
+
+```
 cd mininet
 git checkout -b mininet-2.3.0 2.3.0
 ```
@@ -157,7 +168,6 @@ on the
 ### Install FRR Build Dependencies
 
 ```
-sudo apt update
 sudo apt-get install \
    git autoconf automake libtool make libreadline-dev texinfo \
    pkg-config libpam0g-dev libjson-c-dev bison flex \
@@ -193,8 +203,12 @@ sudo usermod -a -G frrvty frr
 ### Get the FRR 9.1 Source Code
 
 Get the source from github and check out the 9.1 branch:
+
 ```
 git clone https://github.com/FRRouting/frr.git
+```
+
+```
 cd frr
 git checkout stable/9.1
 ```
@@ -231,14 +245,24 @@ From the frr directory, run the commands to build and install FRR:
     --enable-vty-group=frrvty \
     --with-pkg-git-version \
     --with-pkg-extra-version=-MyCustomFRR
+```
+
+```
 make
+```
+
+```
 sudo make install
 ```
 
 ### Install FRR Configuration Files
 
 While the mininet scripts do not run an FRR instance in the default namespace,
-we install the FRR configuration files to provide a complete install of FRR.
+we need to install the FRR configuration files to provide a complete install of FRR to
+allow the integration to function.
+
+
+From the frr directory, run the following:
 
 ```
 sudo install -m 775 -o frr -g frr -d /var/frr
