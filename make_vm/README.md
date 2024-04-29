@@ -1,5 +1,5 @@
 # Create a Mininet / FRR VM
-These are instructions topcreate an Ubuntu based Mininet/FRR VM image with:
+These are instructions to create an Ubuntu based Mininet/FRR VM image with:
 - Ubuntu 22.04.4 LTS
 - Mininet 2.3.0
 - FRR 9.1
@@ -46,7 +46,7 @@ select the default options.
 
 When prompted for names and passwords, I use the following:
 - Your name: *anything*
-- Your servers name: **frr-system**
+- Your server's name: **frr-system**
 - Pick a user name: **ubuntu**
 - Choose a password: **ubuntu**
 - Confirm your password: **ubuntu**
@@ -59,7 +59,7 @@ Select the option to install the OpenSSH server and allow password access.
 An SSH client is the easiest way to run multiple terminal sessions in the
 VM at one time.  You can also import an SSH identity to avoid typing a 
 password when logging in.
-(Importing the identify from Github works great if you have that setup on
+(Importing the identity from Github works great if you have that setup on
 github.com).
 
 Once the install completes, select Reboot now. If the screen pauses and 
@@ -71,7 +71,7 @@ However, I feel the best interaction with the VM is by logging in over SSH.
 If you are using VirtualBox defaults, you will need to add a port forwarding rule
 for ssh access. See these [instructions](https://nsrc.org/workshops/2014/sanog23-virtualization/raw-attachment/wiki/Agenda/ex-virtualbox-portforward-ssh.htm) for port forwarding.
 
-When using virt-manager, I login into the VM by running ssh conencting to the IP address of the VM.
+When using virt-manager, I login into the VM by running ssh connecting to the IP address of the VM.
 I find the IP address to connect to through the virt-manager:
 
   - View -> Details
