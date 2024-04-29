@@ -4,7 +4,7 @@ Free Range Routing (FRR) on Mininet topologies
 # Purpose
 
 Network emulators enable hands-on learning, experimenting, and testing network 
-protocols on virtual toplogies. Mininet uses Linux network name spaces for 
+protocols on virtual topologies. Mininet uses Linux network namespaces for 
 lightweight emulation of routers, switches, and hosts.
 
 This package uses a simple integration of Mininet and FRR with a variety
@@ -16,7 +16,7 @@ This repository contains various topologies and configurations that
 run on a Linux system with FRR and Mininet installed. While not strictly
 necessary, running Mininet and FRR in a VM is strongly recommended.
 
-To run these examples, clone this repostory on an FRR/Mininet system and
+To run these examples, clone this repository on an FRR/Mininet system and
 run the individual Mininet Python scripts.
 
 ## Topologies
@@ -32,8 +32,8 @@ Each scenario is standalone. To run a scenario, open a Linux terminal and
 do the following:
 
 - cd into the directory of the example that you want to run.
-- configure FRR by running configure script.
-- start the eumlation by running the python topology script
+- configure FRR by running the configure script.
+- start the emulation by running the python topology script
 
 Example:
 ```
@@ -42,7 +42,7 @@ cd two_router
 sudo ./mn_topo.py
 ```
 
-This starts the mininet emulator and the relevant FRR routing deamons and brings up the 
+This starts the mininet emulator and the relevant FRR routing daemons and brings up the 
 mininet command line. Mininet provides access to the linux shell on each emulated node
 and connectivity tests. To stop the emulation and shutdown the FRR daemons, enter exit or press ^D.
 
@@ -59,7 +59,7 @@ To run Linux shell commands on individual nodes:
 r1 ip route
 ```
 
-To access the FRR command and configuration shell, run vtysh from a 
+To access the FRR command and configuration shell, run vtysh from
 a Linux termimal for a specific node: vtysh -N "node name"
 
 Example:
@@ -76,14 +76,14 @@ Mininet supports Openflow by running a controller, however these examples do not
 use Openflow beyond whatever Mininet may be doing (if anything) to make 
 the switches "just work".
 
-The configuration scripts config_frr.sh create subdirectories under the 
+The configuration script config_frr.sh creates subdirectories under the 
 FRR configuration, run state, and logging directories and populates the configuration
 files. Note that any existing configuration files in these directories are erased
 as new ones are applied. Copy any updated configurations out of 
 /etc/frr/*nodename* before reconfiguring.
 
 While each of these scenarios "work" in that the routing configuration 
-provides connectivity, they are likley not good examples of how to do things 
+provides connectivity, they are likely not good examples of how to do things 
 "in the right way". There are improvements that can be made to the FRR configurations.
 
 # Requirements
@@ -104,7 +104,7 @@ Instructions for building from source can be found at:
 
 #  Additional Resources
 
-An excellent description of network name spaces and mininet can be found
+An excellent description of network namespaces and mininet can be found at:
 [Network Emulation using Network Namespaces and Mininet](https://www.inf.usi.ch/faculty/carzaniga/edu/adv-ntw/mininet.html).
 
 Kudos to [edoardesd](https://stackoverflow.com/users/7892067/edoardesd) for an answer on Stack Overflow:
